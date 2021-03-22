@@ -1,4 +1,6 @@
-const post = async (url = '', data = {}) => {
+import checkUrl from './checkURL'
+
+const post = async (url = 'localhost:8081/add-url', data = {}) => {
     const response = await fetch(url, {
         method: 'POST',
         credentials: 'same-origin',
@@ -15,16 +17,13 @@ const post = async (url = '', data = {}) => {
     }
 }
 
-const handleSubmit = async () => {
-    /**
-     * TODO
-     *  - Get Value of the input for URL
-     *  - Check if it's URL or not
-     *      yes
-     *          send it to the backend
-     *      no
-     *          show user message it's not valid URL
-     */
+const handleSubmit = async (value) => {
+    if (checkUrl(value)){
+        console.log(post({url: value}));
+    }else{
+        alert("Invalid URL");
+    }
+
 }
 
 export default handleSubmit
